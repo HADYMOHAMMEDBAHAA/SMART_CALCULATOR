@@ -23,8 +23,8 @@ namespace SMART_MATH_CORE.Registery.Tokens.Input_Tokens.List_Recognizer_Token
                 if (firsttime && text[start] == '{')
                 {
                     firsttime = false;
-                    OpenCurlybracket = true;
                     start++;
+                    OpenCurlybracket = true;
                     continue;
                 }
                 if(!firsttime && text[start] == '{')

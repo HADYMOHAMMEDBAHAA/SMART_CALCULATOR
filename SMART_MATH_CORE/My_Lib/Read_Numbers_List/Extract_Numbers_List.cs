@@ -29,7 +29,7 @@ namespace SMART_MATH_CORE.My_Lib.Read_Numbers_List
                     currerntpositionnumber++;
                     continue;
                 }
-                if (OpenCurlyBrackets && text[currerntpositionnumber] == '}')
+                if ( text[currerntpositionnumber] == '}')
                 {
                     CloseCurlyBrackets = true;
                     end = currerntpositionnumber + 1;
@@ -51,7 +51,7 @@ namespace SMART_MATH_CORE.My_Lib.Read_Numbers_List
                 }
                 else
                 {
-
+                    end -= 1;
                     break;
                 }
             }
@@ -59,13 +59,14 @@ namespace SMART_MATH_CORE.My_Lib.Read_Numbers_List
  
             if (OpenCurlyBrackets == CloseCurlyBrackets  && numbers != null && numbers.Count > 1)
             {
+                if(OpenCurlyBrackets)
                 end = currerntpositionnumber + 1;
                 return numbers;
             }
             else if(OpenCurlyBrackets != CloseCurlyBrackets)
             {
-                end = originalstart;
-                return null;
+               
+                return numbers;
             }
             else
             {
