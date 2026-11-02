@@ -57,13 +57,11 @@ namespace SMART_MATH_CORE.My_Lib.Read_Numbers_List
             }
 
  
-            if (OpenCurlyBrackets == CloseCurlyBrackets  && numbers != null && numbers.Count > 1)
+            if (OpenCurlyBrackets == CloseCurlyBrackets  && numbers != null && numbers.Count > 0)
             {
-                if(OpenCurlyBrackets)
-                end = currerntpositionnumber + 1;
                 return numbers;
             }
-            else if(OpenCurlyBrackets != CloseCurlyBrackets)
+            else if(OpenCurlyBrackets != CloseCurlyBrackets && numbers != null && numbers.Count > 1)
             {
                
                 return numbers;

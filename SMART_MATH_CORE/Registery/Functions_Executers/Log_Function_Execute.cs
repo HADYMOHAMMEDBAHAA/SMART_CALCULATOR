@@ -55,29 +55,42 @@ namespace SMART_MATH_CORE.Registery.Functions_Executers
     {
         public override Primary.Primary_Value.Primary_Value Execute(Primary.Primary_Value.Primary_Value input)
         {
-            foreach (Number_Type ele in 
-                ((Registery.Primary_Values.List_Primary_Value.List_Primary_Value)input).Value)
+
+            Registery.Primary_Values.List_Primary_Value.List_Primary_Value result =
+               new Registery.Primary_Values.List_Primary_Value.List_Primary_Value();
+
+            if (((Registery.Primary_Values.List_Primary_Value.List_Primary_Value)input).Value.Count > 1)
             {
-                ele.Value = Math.Log10(ele.Value);
+                bool firsttime = true;
+               Number_Type baseValue =
+              ((Registery.Primary_Values.List_Primary_Value.List_Primary_Value)input).Value[0];
+
+                result.Value = new List<Number_Type>();
+
+                foreach (Number_Type num in
+                    ((Registery.Primary_Values.List_Primary_Value.List_Primary_Value)input).Value)
+                {
+                    if (firsttime)
+                    {
+                        firsttime = false;
+                        continue;
+                    }
+
+                    result.Value.Add(new Number_Type { Value = Math.Log(num.Value, baseValue.Value)});
+                }
             }
-            return ((Registery.Primary_Values.List_Primary_Value.List_Primary_Value)input);
+            return result;
         }
 
         public override Primary.Primary_Value.Primary_Value Execute(List<Primary.Primary_Value.Primary_Value> input)
         {
-            if (input.Count == 2)
+            Primary.Primary_Value.Primary_Value result =
+               new Primary.Primary_Value.Primary_Value();
+            if (input.Count > 0)
             {
-                Registery.Primary_Values.Number_Primary_VaLue.Number_Primary_Value baseValue =
-                    (Registery.Primary_Values.Number_Primary_VaLue.Number_Primary_Value)input[0];
-                Registery.Primary_Values.List_Primary_Value.List_Primary_Value value =
-                    (Registery.Primary_Values.List_Primary_Value.List_Primary_Value)input[1];
-                Registery.Primary_Values.List_Primary_Value.List_Primary_Value result =
-                    new Registery.Primary_Values.List_Primary_Value.List_Primary_Value();
-                foreach (Number_Type ele in value.Value)
+                foreach (Primary.Primary_Value.Primary_Value list in input)
                 {
-                    Number_Type newEle = new Number_Type();
-                    newEle.Value = Math.Log(ele.Value, baseValue.Value.Value);
-                    result.Value.Add(newEle);
+                    result = this.Execute(list);
                 }
                 return result;
             }
